@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 
+from pathlib import Path
 import argparse
 import sys
 
-from . import utils
 from . import day1
 from . import day2
 from . import day3
@@ -47,8 +47,13 @@ def get_args():
     return parser.parse_args()
 
 
+def get_default_input(day):
+    return (Path(__file__).parent.parent /
+            Path('inputs/day' + str(day) + '.txt')).open()
+
+
 def run_day(day, part=None, input=None):
-    inputfile = input if input else utils.get_default_input(day)
+    inputfile = input if input else get_default_input(day)
     if day == 1:
         return day1.main(inputfile, part)
     elif day == 2:

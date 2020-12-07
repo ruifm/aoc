@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-from . import utils
-
 
 def main(input, part, should_print=False):
     input.close()
