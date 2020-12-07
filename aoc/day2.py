@@ -6,7 +6,7 @@ def parse_input(input):
     for line in input.readlines():
         entry = line.split(':', maxsplit=1)
         raw_policy = entry[0]
-        pw = entry[1]
+        pw = entry[1].strip()
 
         db.append({'raw_policy': raw_policy, 'pw': pw})
 
@@ -25,15 +25,21 @@ def parse_policy(raw_policy):
     return policy
 
 
-def is_valid(policy, pw):
-    return pw.count(policy['char']) in range(policy['bounds'][0],
-                                             policy['bounds'][1] + 1)
+def is_valid(policy, pw, version):
+    if version == 1:
+        return pw.count(policy['char']) in range(policy['bounds'][0],
+                                                 policy['bounds'][1] + 1)
+    elif version == 2:
+        return ((pw[policy['bounds'][0] - 1] == policy['char']) ^
+                (pw[policy['bounds'][1] - 1] == policy['char']))
+    else:
+        return None
 
 
-def count_valid_pws(db):
+def count_valid_pws(db, version):
     count = 0
     for entry in db:
-        if is_valid(parse_policy(entry['raw_policy']), entry['pw']):
+        if is_valid(parse_policy(entry['raw_policy']), entry['pw'], version):
             count += 1
 
     return count
@@ -45,14 +51,14 @@ def main(input, part, should_print=False):
     answers = [None, None]
 
     if not part or part == 1:
-        answers[0] = count_valid_pws(pw_db)
+        answers[0] = count_valid_pws(pw_db, 1)
         if should_print:
             print(answers[0])
         if part:
             return answers[0]
 
     if not part or part == 2:
-        answers[1] = None
+        answers[1] = count_valid_pws(pw_db, 2)
         if should_print:
             print(answers[1])
         if part:
