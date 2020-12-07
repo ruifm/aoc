@@ -22,8 +22,3 @@ def main(input, part, should_print=False):
             return answers[1]
 
     return answers
-
-
-if __name__ == "__main__":
-    args = utils.get_args(21)
-    main(args.inputfile, args.part, True)
