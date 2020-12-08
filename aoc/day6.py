@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
-def create_negative_answer():
-    return [False for i in range(26)]
+def create_default_answer(default=False):
+    return [default for i in range(26)]
 
 def parse_input(input):
     groups = []
@@ -12,7 +12,7 @@ def parse_input(input):
             group = []
             continue
 
-        answer = create_negative_answer()
+        answer = create_default_answer()
         for char in line.strip():
             answer[ord(char) - ord('a')] = True
         group.append(answer)
@@ -22,7 +22,7 @@ def parse_input(input):
 
 
 def or_in_group(group):
-    combined = create_negative_answer()
+    combined = create_default_answer()
     for answer in group:
         for i in range(26):
             combined[i] |= answer[i]
@@ -30,8 +30,17 @@ def or_in_group(group):
     return combined
 
 
-def count_yes(groups):
-    collapsed = [or_in_group(group).count(True) for group in groups]
+def and_in_group(group):
+    combined = create_default_answer(True)
+    for answer in group:
+        for i in range(26):
+            combined[i] &= answer[i]
+
+    return combined
+
+
+def count_yes(groups, op):
+    collapsed = [op(group).count(True) for group in groups]
     return sum(collapsed)
 
 
@@ -41,14 +50,14 @@ def main(input, part, should_print=False):
     answers = [None, None]
 
     if not part or part == 1:
-        answers[0] = count_yes(groups)
+        answers[0] = count_yes(groups, or_in_group)
         if should_print:
             print(answers[0])
         if part:
             return answers[0]
 
     if not part or part == 2:
-        answers[1] = None
+        answers[1] = count_yes(groups, and_in_group)
         if should_print:
             print(answers[1])
         if part:
