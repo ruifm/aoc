@@ -1,12 +1,41 @@
 #!/usr/bin/env python3
 
+def decode(input):
+    input = input.replace('F', '0')
+    input = input.replace('B', '1')
+    input = input.replace('L', '0')
+    input = input.replace('R', '1')
+    return input
+
+
+def parse_seats(input):
+    seats = []
+    for line in input.readlines():
+        raw_seat = decode(line.strip())
+        seats.append([int(raw_seat[:7], base=2), int(raw_seat[7:], base=2)])
+
+    return seats
+
+
+def to_seatid(seat):
+    return 8 * seat[0] + seat[1]
+
+
+def get_seatids(seats):
+    return [to_seatid(seat) for seat in seats]
+
+
+def max_seatid(seats):
+    return max(get_seatids(seats))
+
 
 def main(input, part, should_print=False):
+    seats = parse_seats(input)
     input.close()
     answers = [None, None]
 
     if not part or part == 1:
-        answers[0] = None
+        answers[0] = max_seatid(seats)
         if should_print:
             print(answers[0])
         if part:
