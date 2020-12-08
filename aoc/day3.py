@@ -32,7 +32,10 @@ def main(input, part, should_print=False):
             return answers[0]
 
     if not part or part == 2:
-        answers[1] = None
+        answers[1] = 1
+        slopes = [[1, 1], [3, 1], [5, 1], [7, 1], [1, 2]]
+        for slope in slopes:
+            answers[1] *= count_trees(raw_map, slope)
         if should_print:
             print(answers[1])
         if part:
