@@ -33,10 +33,10 @@ class TestAoC(unittest.TestCase):
         self.assertEqual(aoc.aoc.run_day(3, 2, get_default_test_input(3)), 336)
 
     def test_day4_part1(self):
-        self.assertIsNone(aoc.aoc.run_day(4, 1, get_default_test_input(4)))
+        self.assertEqual(aoc.aoc.run_day(4, 1, get_default_test_input(4)), 2)
 
     def test_day4_part2(self):
-        self.assertIsNone(aoc.aoc.run_day(4, 2, get_default_test_input(4)))
+        self.assertEqual(aoc.aoc.run_day(4, 2, get_default_test_input(4)), 2)
 
     def test_day5_part1(self):
         self.assertIsNone(aoc.aoc.run_day(5, 1, get_default_test_input(5)))
