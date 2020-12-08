@@ -29,6 +29,14 @@ def max_seatid(seats):
     return max(get_seatids(seats))
 
 
+def find_missing_id(ids):
+    for id in range(1, max(ids)):
+        if (id not in ids) and ((id - 1 in ids) and (id + 1 in ids)):
+            return id
+
+    return None
+
+
 def main(input, part, should_print=False):
     seats = parse_seats(input)
     input.close()
@@ -42,7 +50,7 @@ def main(input, part, should_print=False):
             return answers[0]
 
     if not part or part == 2:
-        answers[1] = None
+        answers[1] = find_missing_id(get_seatids(seats))
         if should_print:
             print(answers[1])
         if part:
