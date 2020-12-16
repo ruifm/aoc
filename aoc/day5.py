@@ -1,10 +1,11 @@
 #!/usr/bin/env python3
 
+
 def decode(input):
-    input = input.replace('F', '0')
-    input = input.replace('B', '1')
-    input = input.replace('L', '0')
-    input = input.replace('R', '1')
+    input = input.replace("F", "0")
+    input = input.replace("B", "1")
+    input = input.replace("L", "0")
+    input = input.replace("R", "1")
     return input
 
 

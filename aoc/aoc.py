@@ -31,25 +31,39 @@ from . import day24
 
 
 def get_args():
-    parser = argparse.ArgumentParser(description='Compute AoC 2020 answers')
-    parser.add_argument('-p', '--part', type=int,
-                        choices=[1, 2],
-                        help="Filter the answer the by the part number")
-    parser.add_argument('-d', '--day', type=int,
-                        choices=range(1, 25),
-                        help="Filter the answer the by the advent day")
-    parser.add_argument('inputfile', nargs='?', type=argparse.FileType('r'),
-                        default=(None
-                                 if sys.stdin.isatty() else sys.stdin),
-                        help=("if unspecified tries to read from stdin and if"
-                              "that fails, it reads the default input file for"
-                              "that day"))
+    parser = argparse.ArgumentParser(description="Compute AoC 2020 answers")
+    parser.add_argument(
+        "-p",
+        "--part",
+        type=int,
+        choices=[1, 2],
+        help="Filter the answer the by the part number",
+    )
+    parser.add_argument(
+        "-d",
+        "--day",
+        type=int,
+        choices=range(1, 25),
+        help="Filter the answer the by the advent day",
+    )
+    parser.add_argument(
+        "inputfile",
+        nargs="?",
+        type=argparse.FileType("r"),
+        default=(None if sys.stdin.isatty() else sys.stdin),
+        help=(
+            "if unspecified tries to read from stdin and if"
+            "that fails, it reads the default input file for"
+            "that day"
+        ),
+    )
     return parser.parse_args()
 
 
 def get_default_input(day):
-    return (Path(__file__).parent.parent /
-            Path('inputs/day' + str(day) + '.txt')).open()
+    return (
+        Path(__file__).parent.parent / Path("inputs/day" + str(day) + ".txt")
+    ).open()
 
 
 def run_day(day, part=None, input=None):
@@ -109,6 +123,6 @@ def main():
 
     if not args.day:
         for d in range(1, 25):
-            print(d, '\t:', run_day(d, args.part, args.inputfile))
+            print(d, "\t:", run_day(d, args.part, args.inputfile))
     else:
         print(run_day(args.day, args.part, args.inputfile))

@@ -5,17 +5,17 @@ def get_code(input):
     code = []
     for line in input.readlines():
         inst = line.strip().split()
-        code.append({'op': inst[0], 'arg': int(inst[1])})
+        code.append({"op": inst[0], "arg": int(inst[1])})
 
     return code
 
 
 def handle_inst(inst):
-    op = inst['op']
-    arg = inst['arg']
-    if op == 'acc':
+    op = inst["op"]
+    arg = inst["arg"]
+    if op == "acc":
         return 1, arg
-    elif op == 'jmp':
+    elif op == "jmp":
         return arg, 0
     else:
         return 1, 0
@@ -39,12 +39,12 @@ def execute_until_loop(code):
 
 
 def flip_jmp_nop(inst):
-    op = inst['op']
-    arg = inst['arg']
-    if op == 'nop':
-        return {'op': 'jmp', 'arg': arg}
-    elif op == 'jmp':
-        return {'op': 'nop', 'arg': arg}
+    op = inst["op"]
+    arg = inst["arg"]
+    if op == "nop":
+        return {"op": "jmp", "arg": arg}
+    elif op == "jmp":
+        return {"op": "nop", "arg": arg}
 
 
 def execute_all(code):
@@ -71,10 +71,10 @@ def remove_loop_and_execute(code):
 
     for addr in visited_addrs:
         inst = code[addr]
-        op = inst['op']
-        arg = inst['arg']
+        op = inst["op"]
+        arg = inst["arg"]
 
-        if op == 'acc':
+        if op == "acc":
             continue
 
         new_code = code.copy()
