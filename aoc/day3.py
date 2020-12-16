@@ -3,7 +3,7 @@
 
 def is_tree(raw_map, x, y):
     row = raw_map[y].strip()
-    return row[x % len(row)] == '#'
+    return row[x % len(row)] == "#"
 
 
 def count_trees(raw_map, step):

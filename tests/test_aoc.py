@@ -6,19 +6,21 @@ from context import aoc
 
 
 def get_default_test_input(day):
-    return (Path(__file__).parent /
-            Path('inputs/day' + str(day) + '.txt')).open()
+    return (
+        Path(__file__).parent / Path("inputs/day" + str(day) + ".txt")
+    ).open()
 
 
 class TestAoC(unittest.TestCase):
-
     def test_day1_part1(self):
-        self.assertEqual(aoc.aoc.run_day(1, 1, get_default_test_input(1)),
-                         514579)
+        self.assertEqual(
+            aoc.aoc.run_day(1, 1, get_default_test_input(1)), 514579
+        )
 
     def test_day1_part2(self):
-        self.assertEqual(aoc.aoc.run_day(1, 2, get_default_test_input(1)),
-                         241861950)
+        self.assertEqual(
+            aoc.aoc.run_day(1, 2, get_default_test_input(1)), 241861950
+        )
 
     def test_day2_part1(self):
         self.assertEqual(aoc.aoc.run_day(2, 1, get_default_test_input(2)), 2)
@@ -159,5 +161,5 @@ class TestAoC(unittest.TestCase):
         self.assertIsNone(aoc.aoc.run_day(24, 2, get_default_test_input(24)))
 
 
-if __name__ == '__main__':
+if __name__ == "__main__":
     unittest.main()

@@ -1,20 +1,22 @@
 #!/usr/bin/env python3
 
+
 def create_default_answer(default=False):
     return [default for i in range(26)]
+
 
 def parse_input(input):
     groups = []
     group = []
     for line in input.readlines():
-        if line == '\n' and len(group) > 0:
+        if line == "\n" and len(group) > 0:
             groups.append(group)
             group = []
             continue
 
         answer = create_default_answer()
         for char in line.strip():
-            answer[ord(char) - ord('a')] = True
+            answer[ord(char) - ord("a")] = True
         group.append(answer)
 
     groups.append(group)
